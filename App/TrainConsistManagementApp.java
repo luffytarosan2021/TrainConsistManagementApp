@@ -1,42 +1,40 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
         // --- UC1: Initialization ---
         System.out.println("=== Train Consist Management App ===");
-
-        // --- UC2: Dynamic Management of Passenger Bogies ---
-
-        // 1. Create an ArrayList for passenger bogies
         List<String> passengerBogies = new ArrayList<>();
+        Set<String> bogieIds = new HashSet<>();
 
-        // 2. Add bogies (Create/Insertion)
+        System.out.println("Initial Bogie Count: " + passengerBogies.size());
+
+        // --- UC2: Dynamic Management (List) ---
+        System.out.println("\n--- UC2: Adding Passenger Bogies ---");
         passengerBogies.add("Sleeper");
         passengerBogies.add("AC Chair");
         passengerBogies.add("First Class");
+        System.out.println("Current Bogies: " + passengerBogies);
 
-        // 3. Display the list (Read)
-        System.out.println("\n--- Current Train Consist ---");
-        System.out.println("Bogies added: " + passengerBogies);
-        System.out.println("Total count: " + passengerBogies.size());
-
-        // 4. Remove a bogie (Delete)
-        System.out.println("\nRemoving 'AC Chair' from the consist...");
+        System.out.println("Removing 'AC Chair'...");
         passengerBogies.remove("AC Chair");
+        System.out.println("Contains 'Sleeper'? " + passengerBogies.contains("Sleeper"));
 
-        // 5. Check existence (Search)
-        System.out.println("Checking status of 'Sleeper' bogie...");
-        if (passengerBogies.contains("Sleeper")) {
-            System.out.println("Status: Sleeper bogie is present and verified.");
-        } else {
-            System.out.println("Status: Sleeper bogie not found.");
+        // --- UC3: Uniqueness (Set) ---
+        System.out.println("\n--- UC3: Registering Unique IDs ---");
+        bogieIds.add("BG101");
+        bogieIds.add("BG102");
+
+        System.out.println("Attempting to add duplicate ID: BG101...");
+        if (!bogieIds.add("BG101")) {
+            System.out.println("System Blocked Duplicate: BG101 already exists.");
         }
 
-        // 6. Print final list state
-        System.out.println("\n--- Final Train Consist Summary ---");
-        System.out.println("Current Bogies: " + passengerBogies);
-        System.out.println("Final Bogie Count: " + passengerBogies.size());
+        System.out.println("Final Unique IDs: " + bogieIds);
+        System.out.println("Final Consist List: " + passengerBogies);
     }
 }
